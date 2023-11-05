@@ -1,0 +1,39 @@
+定义模型->生成表结构
+
+自动生成表结构：
+type Student struct {
+  Name      string
+  Age       int
+  MyStudent string
+}
+冷知识：小写属性不会生成字段的
+db.AutoMigrate(&Student{})
+AutoMigrate：只新增，不删除、不修改
+这意味着你修改某字段名字会新增他新的字段，不会将原有的字段删除
+
+修改表中字段的大小位数
+type Student struct {
+	Name      string `gorm:"size:10"`
+	Age       int    `gorm:"size:3"`
+	MyStudent string `gorm:"size:128"`
+}
+两种描述:
+1.Name      string `gorm:"size:10"`
+2.Name      string `gorm:"type:varchar(10)"`
+坑：后面添加的是原始`字符串`,size:用“”包围
+
+字段标签
+type
+size
+column:自定义列名
+primaryKey:将列自定义为主键
+unique:唯一键
+default
+not null
+embedded嵌套字段
+embeddedPrefix嵌套字段前缀
+comment：注释
+
+多标签用；连接
+
+eg:UUID string `gorm:"primaryKey;unique;comment:主键"`

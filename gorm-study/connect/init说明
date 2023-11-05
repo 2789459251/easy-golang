@@ -1,0 +1,22 @@
+配置
+db ,err := gorm.Open("gorm.db"),&gorm.Config{
+    SkipDefaultTransaction: true,//开启跳过默认事物
+})
+
+命名配置
+db ,err := gorm.Open("gorm.db"),&gorm.Config{
+    SkipDefaultTransaction: true,//开启跳过默认事物
+    amingStrategy: schema.NamingStrategy{
+        TablePrefix:   "f_",  // 表名前缀
+        SingularTable: false, // 单数表名，不开启单数
+        NoLowerCase:   false, // 关闭小写转换
+      },
+})
+
+自动生成表
+type Student struct {
+  Name      string
+  Age       int
+  MyStudent string
+}
+db.AutoMigrate(&Student{})

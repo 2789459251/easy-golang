@@ -1,0 +1,42 @@
+单表创建
+DB.AutoMigrate(数据类型指针)
+单表添加
+DB.Create(实例化对象指针)
+   传空值是可以的
+   指针类型可以传空
+
+批量插入
+传入切片指针即可
+
+查询单条数据
+DB.Take(实例化对象指针,id)
+    按照ID查询第一条返回
+    ID可以指定
+    不存在就是：record not found
+   -> 根据其他条件查询：
+        DB.Take(&s1, "name = ?", "小赵爱数5")用？当做占位符防止sql注入
+        可以拼接sql
+        ！！！ 使用fmt.Sprintf要小心sql注入
+        DB.Take(&student,fmt.Sprintf("name = '%s'","'小赵爱吃菜'or 1 = 1;#"))->student是切片时，数据库地库都被扒出来啦
+     SELECT * FROM `f_students` WHERE name = '小赵爱吃菜'or 1 = 1#' LIMIT 1
+   ->根据stuct查询：
+        	s1.ID = 5
+        	DB.Take(&s1)
+DB.First()
+    返回第一条符条的
+DB.Last()
+    返回最后一条符合的
+
+获取查询结果：
+    	DB.Take(&s1).RowsAffected
+
+
+查询多条数据：
+	var studentList []Student
+	cnt := DB.Find(&studentList).RowsAffected
+	eg：{3 小赵爱吃菜 8 true 0xc000204900}->	data, _ := json.Marshal(studentList)
+                                      	    fmt.Println(string(data))->{"ID":3,"Name":"小赵爱吃菜","Ager":true,"Email":"1826664598@qq.com"}
+    根据主键查多条：
+    	DB.Find(&studentList, []int{4, 7, 9})
+    根据其他:
+        DB.Find(&studentList, "name in (?)", []string{"小赵爱数6", "小赵爱数8"})

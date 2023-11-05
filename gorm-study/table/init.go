@@ -11,12 +11,6 @@ import (
 var mysqlLogger logger.Interface
 var DB *gorm.DB
 
-type Student struct {
-	Name      string
-	Age       int
-	MyStudent string
-}
-
 func init() {
 	username := "root"  //账号
 	password := "123"   //密码

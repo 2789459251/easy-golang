@@ -13,7 +13,7 @@ db ,err := gorm.Open("gorm.db"),&gorm.Config{
       },
 })
 
-自动生成表
+自动生成表：
 type Student struct {
   Name      string
   Age       int

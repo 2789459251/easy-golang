@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
+var mysqlLogger logger.Interface
 var DB *gorm.DB
 
 type Student struct {
@@ -23,6 +25,7 @@ func init() {
 	Dbname := "gorm"    //数据库名
 	timeout := "10s"    //连接超时，10秒
 
+	mysqlLogger = logger.Default.LogMode(logger.Info) //全局日志===显示日志等级
 	// root:root@tcp(127.0.0.1:3306)/gorm?
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local&timeout=%s", username, password, host, port, Dbname, timeout)
 	//连接MYSQL, 获得DB类型实例，用于后面的数据库读写操作。
@@ -33,6 +36,7 @@ func init() {
 			SingularTable: false, // 单数表名，不开启单数
 			NoLowerCase:   false, // 关闭小写转换
 		},
+		//Logger: mysqlLogger,//全局日志
 	})
 	if err != nil {
 		panic("连接数据库失败, error=" + err.Error())
@@ -41,5 +45,8 @@ func init() {
 	DB = db
 }
 func main() {
-	DB.AutoMigrate(&Student{})
+	//DB = DB.Session(&gorm.Session{
+	//	Logger: mysqlLogger,
+	//})
+	DB.Debug().AutoMigrate(&Student{})
 }

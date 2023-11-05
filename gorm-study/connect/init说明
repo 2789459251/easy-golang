@@ -20,3 +20,12 @@ type Student struct {
   MyStudent string
 }
 db.AutoMigrate(&Student{})
+
+创建日志
+1.全局日志
+2.创建session:DB =   DB.Session(&gorm.Session{
+                        logger:mysqlLogger,
+                        })
+3.使用debug()方法：DB.Debug()
+    var mysqlLogger logger.Interface
+	mysqlLogger = logger.Default.LogMode(logger.Info)

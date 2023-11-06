@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"gorm.io/gorm"
 )
 
@@ -60,7 +59,7 @@ func main() {
 
 	//查询多条记录
 
-	var studentList []Student
+	//var studentList []Student
 	DB = DB.Session(&gorm.Session{
 		Logger: mysqlLogger,
 	})
@@ -75,6 +74,10 @@ func main() {
 	//DB.Find(&studentList, []int{4, 7, 9})
 	//fmt.Println(studentList)
 
-	DB.Find(&studentList, "name in (?)", []string{"小赵爱数6", "小赵爱数8"})
-	fmt.Println(studentList)
+	//DB.Find(&studentList, "name in (?)", []string{"小赵爱数6", "小赵爱数8"})
+	//fmt.Println(studentList)
+	var student Student
+	DB.Take(&student, "name = ?", "错误")
+	student.Name = "正确"
+	DB.Select("name").Save(&student)
 }

@@ -40,3 +40,15 @@ DB.Last()
     	DB.Find(&studentList, []int{4, 7, 9})
     根据其他:
         DB.Find(&studentList, "name in (?)", []string{"小赵爱数6", "小赵爱数8"})
+
+更新操作:3种方法
+    更新多个字段->DB.Save(&student)
+         或者：DB.Model(&Student{}).Where("age = ?",21).Update(字段名，更新值)
+    更新指定字段->DB.Select("字段名").Save(&student)
+    批量更新->DB.Find(&studentList,[]int{1,2,3}).Update("字段名"，修改值)
+           ->DB.Find(&studentList,[]int{1,2,3}).Updates(结构体)——0值不会改/传入map0值改
+
+
+删除操作：
+    1.DB.Delete(模型实例化指针,id)
+    2.先查再删

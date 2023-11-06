@@ -12,6 +12,7 @@ var mysqlLogger logger.Interface
 var DB *gorm.DB
 
 func init() {
+
 	username := "root"  //账号
 	password := "123"   //密码
 	host := "127.0.0.1" //数据库地址，可以是Ip或者域名

@@ -16,6 +16,7 @@ func (user *Student) BeforeCreate(tx *gorm.DB) (err error) {
 	email := "test.qq.com"
 	user.Email = &email
 	return nil
+
 }
 func main() {
 	//DB.AutoMigrate(&Student{})

@@ -14,4 +14,4 @@ HOOK
     DB.Session(&gorm.Session{SkipHooks: true }).Create(&user)
     DB.Session(&gorm.Session{SkipHooks: true }).Create(&users)
     DB.Session(&gorm.Session{SkipHooks: true }).CreateInBatches(用户, 100 )
-注意：从地图创建时，不会调用钩子，不会保存关联，也不会回填主键值
+注意：从地图创建时，不会调用钩子，不会保存关联，也不会回填主键值。

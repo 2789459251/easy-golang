@@ -1,0 +1,17 @@
+HOOK
+    Hook 是在创建、查询、更新、删除等操作之前、之后调用的函数。
+    如果您已经为模型定义了指定的方法，它会在创建、更新、查询、删除时自动被调用。
+    如果任何回调返回错误，GORM 将停止后续的操作并回滚事务。！！！
+
+钩子方法的函数签名应该是 func(*gorm.DB) error
+例子：
+    func (user *Student) BeforeCreate(tx *gorm.DB) (err error) {
+	    email := "test.qq.com"
+	    user.Email = &email
+	    return nil
+    }
+如果想跳过Hooks方法，可以使用SkipHookssession模式，例如：
+    DB.Session(&gorm.Session{SkipHooks: true }).Create(&user)
+    DB.Session(&gorm.Session{SkipHooks: true }).Create(&users)
+    DB.Session(&gorm.Session{SkipHooks: true }).CreateInBatches(用户, 100 )
+注意：从地图创建时，不会调用钩子，不会保存关联，也不会回填主键值

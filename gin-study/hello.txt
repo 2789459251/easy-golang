@@ -1,0 +1,9 @@
+<h1 style='color :orange'>hello goland!</h1>
+<h2>hello word</h2>
+<img id='i1' src='https://pbs.twimg.com/media/FHJJuIuVkAIdAN6.jpg:large'>
+<button id='b1'>点我吧</button>
+<script>
+document.getElementById('b1').onclick=function(){
+    document.getElementById('i1').src='http://chinesemov.com/images/actors2/Wang-Xingyue-1.jpg'
+}
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><title>模版继承</title></head>
+<body>
+<hr>
+{{template "ol.tmpl"}}
+<hr>
+{{template "ul.tmpl"}}
+{{block "comment" .}}
+{{end}}
+</body>
+<p>
+</html>
+{{define "ul.tmpl"}}
+    <ul>
+        <li>花鸟</li>
+        <li>鱼虫</li>
+        <li>满天星</li>
+    </ul>
+{{end}}
+{{define "ol.tmplS"}}
+    <ol>
+        <li>注册</li>
+        <li>模型</li>
+        <li>实例</li>
+    </ol>
+{{end}}

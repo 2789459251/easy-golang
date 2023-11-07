@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>嵌套自定义函数</title>
+</head>
+<body>
+<h1>嵌套模版函数</h1>
+<hr>
+{{template "oil.tmpl"}}
+<hr>
+{{template "ul.SSStmpl"}}
+<h1>这是** 页面</h1>
+<div>你好, {{- . -}}</div>
+</body>
+
+<p>
+</html>
+{{define "ul.tmpl"}}
+    <ul>
+        <li>花鸟</li>
+        <li>鱼虫</li>
+        <li>满天星</li>
+    </ul>
+{{end}}
+{{define "ol.tmp;"}}
+    <ol>
+        <li>注册</li>
+        <li>模型</li>
+        <li>实例</li>
+    </ol>

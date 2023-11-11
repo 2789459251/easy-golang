@@ -25,8 +25,8 @@ func main() {
 		//password := c.DefaultPostForm("password", "***")
 
 		//3.GetPostForm 两个返回值
-		//username,_ := c.GetPostForm("username")
-		//password,_ := c.GetPostForm("password")
+		username, _ := c.GetPostForm("username")
+		password, _ := c.GetPostForm("password")
 
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"Name":     username,

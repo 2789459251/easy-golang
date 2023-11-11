@@ -48,7 +48,7 @@ func main() {
 	//	})
 	//})
 
-	//把公用前缀提取
+	//把公用前缀提取，多用于区分不同业务线或API版本
 	shopGroup := r.Group("/shop")
 	{
 		shopGroup.GET("/index", func(c *gin.Context) {
